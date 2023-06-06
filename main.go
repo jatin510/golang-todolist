@@ -7,11 +7,28 @@ import (
 	"os/signal"
 	"syscall"
 	"time"
+
+	"github.com/jatin510/golang-todolist/database"
+	"github.com/jatin510/golang-todolist/repository"
+	"go.mongodb.org/mongo-driver/mongo"
 )
+
+var (
+	DB        *mongo.Database
+	DB_Client *mongo.Client
+)
+
+func init() {
+	DB_Client, DB = database.InitDatabase()
+}
 
 func main() {
 
 	l := log.Default()
+
+	// init repository
+	repo := repository.InitRepository(DB)
+	_ = repo
 
 	s := http.Server{
 		Addr:         ":4000",
