@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/jatin510/golang-todolist/database"
+	"github.com/jatin510/golang-todolist/handler"
 	"github.com/jatin510/golang-todolist/repository"
 	"go.mongodb.org/mongo-driver/mongo"
 )
@@ -29,6 +30,10 @@ func main() {
 	// init repository
 	repo := repository.InitRepository(DB)
 	_ = repo
+
+	// init handler
+	handler := handler.InitHandler(repo, l)
+	_ = handler
 
 	s := http.Server{
 		Addr:         ":4000",
