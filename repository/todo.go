@@ -17,8 +17,8 @@ var collection = "todos"
 
 func InitTodoRepository(db *mongo.Database) TodoRepositoryInterface {
 	return &TodoRepository{
-		DB:         db,
-		Collection: db.Collection(collection),
+		DB: db,
+		// Collection: db.Collection(collection),
 	}
 }
 

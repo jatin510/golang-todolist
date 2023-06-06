@@ -11,6 +11,7 @@ import (
 	"github.com/jatin510/golang-todolist/database"
 	"github.com/jatin510/golang-todolist/handler"
 	"github.com/jatin510/golang-todolist/repository"
+	"github.com/jatin510/golang-todolist/route"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -29,15 +30,17 @@ func main() {
 
 	// init repository
 	repo := repository.InitRepository(DB)
-	_ = repo
 
 	// init handler
 	handler := handler.InitHandler(repo, l)
-	_ = handler
+
+	// init router
+	router := route.InitRoute(handler)
 
 	s := http.Server{
 		Addr:         ":4000",
 		ErrorLog:     l,
+		Handler:      router,
 		ReadTimeout:  10 * time.Second,
 		WriteTimeout: 10 * time.Second,
 	}
