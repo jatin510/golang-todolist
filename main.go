@@ -29,7 +29,7 @@ func main() {
 	l := log.Default()
 
 	// init repository
-	repo := repository.InitRepository(DB)
+	repo := repository.InitRepository(DB, l)
 
 	// init handler
 	handler := handler.InitHandler(repo, l)

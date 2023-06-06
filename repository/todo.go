@@ -1,35 +1,40 @@
 package repository
 
-import "go.mongodb.org/mongo-driver/mongo"
+import (
+	"log"
+
+	"go.mongodb.org/mongo-driver/mongo"
+)
 
 type TodoRepository struct {
 	DB         *mongo.Database
 	Collection *mongo.Collection
+	l          *log.Logger
 }
 
 type TodoRepositoryInterface interface {
-	getTodo()
-	getAllTodo()
-	saveTodo()
+	GetTodo()
+	GetAllTodo()
+	SaveTodo()
 }
 
 var collection = "todos"
 
-func InitTodoRepository(db *mongo.Database) TodoRepositoryInterface {
+func NewTodoRepository(db *mongo.Database, l *log.Logger) TodoRepositoryInterface {
 	return &TodoRepository{
-		DB: db,
-		// Collection: db.Collection(collection),
+		DB:         db,
+		Collection: db.Collection(collection),
+		l:          l,
 	}
 }
 
-func (t *TodoRepository) getTodo() {
-
+func (t *TodoRepository) GetTodo() {
+	t.l.Println("get todo from repo")
 }
 
-func (t *TodoRepository) getAllTodo() {
-
+func (t *TodoRepository) GetAllTodo() {
 }
 
-func (t *TodoRepository) saveTodo() {
+func (t *TodoRepository) SaveTodo() {
 
 }

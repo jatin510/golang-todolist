@@ -26,6 +26,7 @@ func NewTodoHandler(repository repository.Repository, l *log.Logger) TodoHandler
 
 func (t *TodoHandler) GetTodo(w http.ResponseWriter, r *http.Request) {
 	t.l.Println("get todo")
+	t.repository.TodoRepository.GetTodo()
 	w.WriteHeader(http.StatusOK)
 }
 
