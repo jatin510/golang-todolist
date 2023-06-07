@@ -9,8 +9,15 @@ import (
 func InitRoute(handler handler.Handler) http.Handler {
 	sm := http.NewServeMux()
 
-	sm.HandleFunc("/todo/get", handler.TodoHandler.GetTodo)
-	sm.HandleFunc("/todo/create", handler.TodoHandler.SaveTodo)
+	sm.HandleFunc("/todo", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method == http.MethodGet {
+			handler.TodoHandler.GetTodo(w, r)
+		}
+
+		if r.Method == http.MethodPost {
+			handler.TodoHandler.SaveTodo(w, r)
+		}
+	})
 	return sm
 
 }
